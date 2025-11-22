@@ -1,6 +1,5 @@
 name: CI/CD Hono Railway
 
-# Trigger workflow saat push atau pull request ke branch main
 on:
   push:
     branches: ["main"]
@@ -33,7 +32,8 @@ jobs:
       # 5. Deploy to Railway
       - name: Deploy to Railway
         env:
-          RAILWAY_TOKEN: ${{ secrets.TOKEN }}  # token dari GitHub Secrets
+          RAILWAY_TOKEN: ${{ secrets.TOKEN }}
+          RAILWAY_SERVICE_ID: ${{ secrets.SERVICE_ID }}
         run: |
           npm install -g @railway/cli
-          railway up --detach
+          railway up --detach --service $RAILWAY_SERVICE_ID
