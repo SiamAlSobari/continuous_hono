@@ -23,3 +23,9 @@ jobs:
 
           - name: Run Build
             run: npm run build
+        
+          - name: Deploy
+            run: |
+               npm install -g railway
+               railway login --token ${{ secrets.TOKEN }}
+               railway up --project ${{ secrets.PROJECT_ID }} --detach
